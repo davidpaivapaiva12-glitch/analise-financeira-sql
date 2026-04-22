@@ -1,0 +1,26 @@
+CREATE DATABASE AnaliseFinanceira;
+GO
+
+USE AnaliseFinanceira;
+
+CREATE TABLE Clientes (
+    Id INT PRIMARY KEY IDENTITY,
+    Nome VARCHAR(100),
+    Cidade VARCHAR(50)
+);
+
+CREATE TABLE Contas (
+    Id INT PRIMARY KEY IDENTITY,
+    ClienteId INT,
+    Saldo DECIMAL(10,2),
+    FOREIGN KEY (ClienteId) REFERENCES Clientes(Id)
+);
+
+CREATE TABLE Transacoes (
+    Id INT PRIMARY KEY IDENTITY,
+    ContaId INT,
+    Tipo VARCHAR(10), -- Entrada ou Saida
+    Valor DECIMAL(10,2),
+    DataTransacao DATE,
+    FOREIGN KEY (ContaId) REFERENCES Contas(Id)
+);
